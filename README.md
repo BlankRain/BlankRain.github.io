@@ -1,3 +1,3 @@
 # BlankRain.github.io
 
-GayPage
+黑色雨滴的GayHub个人主页~
