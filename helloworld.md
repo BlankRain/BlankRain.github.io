@@ -40,7 +40,7 @@ while(true){alert`hello world`}
 ```
 害人害己,慎用~
 
-##技二: 红生术
+##技三: 红生术
 
 战技创作者:狗好看
 ```
@@ -53,4 +53,14 @@ while(true){alert`hello world`}
 
 用宏生了新的符号,取其音,装个文艺逼,红生术~
 
+##技四: 龙爪功
+
+龙字辈的都是三叔创的~
+```
+let hello = (who) => `hello, ${who}`
+hello  `world` // hello,world
+```
+特点: 有种js版的scala的感觉~ 
+
+撕~ 盖~ 拉~ 龙爪功三式~
 
