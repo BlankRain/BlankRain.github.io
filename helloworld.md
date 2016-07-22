@@ -21,7 +21,7 @@ scream("hello world") //HELLO WORLD!!
 
 ##技二: 狗吠功
 
-技艺创作者:二狗子. 
+战技创作者:二狗子. 
 
 特点：强势弹窗,阻塞线程.
 ```
@@ -39,3 +39,15 @@ alert`helloworld`
 while(true){alert`hello world`}
 ```
 害人害己,慎用~
+
+##技二: 红生术
+
+战技创作者:狗好看
+```
+;; clj 
+ (defmacro hello [what] (print "hello" what))
+ 
+  (hello world) ;;; hello worldnil
+```
+###战技特点: 如果用函数,world是未定义的符号~ 但是使用宏,就不会出现问题.  (hello world) 无引号~
+
