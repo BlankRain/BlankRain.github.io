@@ -49,5 +49,8 @@ while(true){alert`hello world`}
  
   (hello world) ;;; hello worldnil
 ```
-###战技特点: 如果用函数,world是未定义的符号~ 但是使用宏,就不会出现问题.  (hello world) 无引号~
+战技特点: 如果用函数,world是未定义的符号~ 但是使用宏,就不会出现问题.  (hello world) 无引号~
+
+用宏生了新的符号,取其音,装个文艺逼,红生术~
+
 
