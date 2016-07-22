@@ -20,7 +20,10 @@ scream("hello world") //HELLO WORLD!!
 ```
 
 ##技二: 狗吠功
-技艺创作者:二狗子. 特点：强势弹窗,阻塞线程.
+
+技艺创作者:二狗子. 
+
+特点：强势弹窗,阻塞线程.
 ```
 alert("hello world!!")
 
