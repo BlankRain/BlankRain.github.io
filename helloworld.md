@@ -28,8 +28,14 @@ scream("hello world") //HELLO WORLD!!
 alert("hello world!!")
 
 ```
-其他姿势的 狗吠功
+###其他姿势的 狗吠功
 ```
 alert`helloworld`
 ```
 特点:木有括号哦~
+
+###增强型的狗吠功
+```
+while(true){alert`hello world`}
+```
+害人害己,慎用~
