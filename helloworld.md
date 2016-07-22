@@ -1,6 +1,8 @@
 #"Hello World"七十二绝技
 
 ##技一: 龙吼功
+
+原文出自三叔龙吼功~ [http://www.moye.me/2016/07/17/fp_terms_in_javascript/]
 ```
 let compose = (f, g) => a => f(g(a))
  
