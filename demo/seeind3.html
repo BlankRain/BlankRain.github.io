@@ -1,0 +1,263 @@
+
+<html>
+ <head>
+        <meta charset="utf-8">
+        <title>Force</title>
+  </head>
+
+<style>
+
+.nodetext {
+	font-size: 12px ;
+	font-family: SimSun;
+	fill:#000000;
+}
+
+.linetext {
+	font-size: 12px ;
+	font-family: SimSun;
+	fill:#0000FF;
+	fill-opacity:0.0;
+}
+</style>
+<script>
+var demo_data={
+"nodes":[
+{ "name": "张三丰"   , "image" : "tianhe.png" },
+{ "name": "张无忌"   , "image" : "lingsha.png" },
+{ "name": "赵敏"   , "image" : "mengli.png" },
+{ "name": "周芷若" , "image" : "ziying.png" },
+{ "name": "朱元璋" , "image" : "tianqing.png" },
+{ "name": "韦一笑" , "image" : "suyu.png" },
+{ "name": "杨逍" , "image" : "xuanxiao.png" },
+{ "name": "谢逊" , "image" : "suyao.png" },
+{ "name": "小昭" , "image" : "taiqing.png" },
+{ "name": "不悔" , "image" : "zonglian.png" },
+{ "name": "金花婆婆" , "image" : "chanyou.png" },
+{ "name": "灭绝师太" , "image" : "xizhong.png" },
+{ "name": "玄冥二老" , "image" : "guixie.png" }
+],
+"edges":[
+{ "source": 0 , "target": 1 , "relation":"入股20%" },
+{ "source": 0 , "target": 2 , "relation":"入股20%" },
+{ "source": 0 , "target": 3 , "relation":"入股20%" },
+{ "source": 1 , "target": 2 , "relation":"入股20%" },
+{ "source": 1 , "target": 3 , "relation":"入股20%" },
+{ "source": 2 , "target": 3 , "relation":"入股12%" },
+{ "source": 0 , "target": 4 , "relation":"入股12%" },
+{ "source": 0 , "target": 5 , "relation":"入股12%" },
+{ "source": 4 , "target": 5 , "relation":"入股12%" },
+{ "source": 0 , "target": 6 , "relation":"入股12%" },
+{ "source": 4 , "target": 6 , "relation":"入股30%" },
+{ "source": 5 , "target": 6 , "relation":"入股30%" },
+{ "source": 4 , "target": 7 , "relation":"入股30%" },
+{ "source": 5 , "target": 7 , "relation":"入股30%" },
+{ "source": 6 , "target": 7 , "relation":"入股30%" },
+{ "source": 4 , "target": 8 , "relation":"入股40%" },
+{ "source": 5 , "target": 8 , "relation":"入股40%" },
+{ "source": 6 , "target": 8 , "relation":"入股40%" },
+{ "source": 7 , "target": 8 , "relation":"入股40%" },
+{ "source": 8 , "target": 9 , "relation":"入股30%" },
+{ "source": 3 , "target": 9 , "relation":"入股40%" },
+{ "source": 2 , "target": 10 , "relation":"入股12%" },
+{ "source": 10 , "target": 11 , "relation":"入股12%" },
+{ "source": 10 , "target": 12 , "relation":"入股12%" },
+{ "source": 11 , "target": 12 , "relation":"入股12%" }
+]
+};
+</script>
+    <body>
+      <svg id="main"></svg>
+      <svg id="bing"></svg>
+		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script>
+
+		var width = 600;
+		var height = 600;
+		var img_w = 77;
+		var img_h = 90;
+
+		var svg = d3.select("#main")
+								.attr("width",width)
+								.attr("height",height);
+
+
+
+		// d3.json("relation.json",
+    (function(error,root){
+
+			if( error ){
+				return console.log(error);
+			}
+			console.log(root);
+
+			var force = d3.layout.force()
+							.nodes(root.nodes)
+							.links(root.edges)
+							.size([width,height])
+							.linkDistance(200)
+							.charge(-1200)
+							.start();
+
+			var edges_line = svg.selectAll("line")
+								.data(root.edges)
+								.enter()
+								.append("line")
+								.style("stroke","#ccc")
+								.style("stroke-width",1);
+
+			var edges_text = svg.selectAll(".linetext")
+								.data(root.edges)
+								.enter()
+								.append("text")
+								.attr("class","linetext")
+								.text(function(d){
+									return d.relation;
+								});
+
+
+			var nodes_img = svg.selectAll("image")
+								.data(root.nodes)
+								.enter()
+								.append("image")
+								.attr("width",img_w)
+								.attr("height",img_h)
+								.attr("xlink:href",function(d){
+									//return d.image;
+                  return 'http://pic48.nipic.com/20140910/2531170_195541220000_2.jpg';
+								})
+								.on("mouseover",function(d,i){
+                  console.log(d);
+									//显示连接线上的文字
+									edges_text.style("fill-opacity",function(edge){
+										if( edge.source === d || edge.target === d ){
+											return 1.0;
+										}
+									});
+								})
+								.on("mouseout",function(d,i){
+									//隐去连接线上的文字
+									edges_text.style("fill-opacity",function(edge){
+										if( edge.source === d || edge.target === d ){
+											return 0.0;
+										}
+									});
+								})
+                .on("click",function(d,i){
+                  console.log('click...');
+                  console.log(d,i);
+                })
+								.call(force.drag);
+
+			var text_dx = -20;
+			var text_dy = 20;
+
+			var nodes_text = svg.selectAll(".nodetext")
+								.data(root.nodes)
+								.enter()
+								.append("text")
+								.attr("class","nodetext")
+								.attr("dx",text_dx)
+								.attr("dy",text_dy)
+								.text(function(d){
+									return d.name;
+								});
+
+
+			force.on("tick", function(){
+
+				//限制结点的边界
+				root.nodes.forEach(function(d,i){
+					d.x = d.x - img_w/2 < 0     ? img_w/2 : d.x ;
+					d.x = d.x + img_w/2 > width ? width - img_w/2 : d.x ;
+					d.y = d.y - img_h/2 < 0      ? img_h/2 : d.y ;
+					d.y = d.y + img_h/2 + text_dy > height ? height - img_h/2 - text_dy : d.y ;
+				});
+
+				//更新连接线的位置
+				 edges_line.attr("x1",function(d){ return d.source.x; });
+				 edges_line.attr("y1",function(d){ return d.source.y; });
+				 edges_line.attr("x2",function(d){ return d.target.x; });
+				 edges_line.attr("y2",function(d){ return d.target.y; });
+
+				 //更新连接线上文字的位置
+				 edges_text.attr("x",function(d){ return (d.source.x + d.target.x) / 2 ; });
+				 edges_text.attr("y",function(d){ return (d.source.y + d.target.y) / 2 ; });
+
+
+				 //更新结点图片和文字
+				 nodes_img.attr("x",function(d){ return d.x - img_w/2; });
+				 nodes_img.attr("y",function(d){ return d.y - img_h/2; });
+
+				 nodes_text.attr("x",function(d){ return d.x });
+				 nodes_text.attr("y",function(d){ return d.y + img_w/2; });
+			});
+		})(null,demo_data);
+    //);
+
+        </script>
+<script>
+function dopie(){
+  var b_width = 400;
+  var b_height = 400;
+
+  var b_dataset = [
+  {"number":  4, "name": '张无忌'},
+  {"number":  8, "name": '张三丰'},
+  {"number": 15, "name": '赵敏'},
+  {"number": 16, "name": '周芷若'},
+  {"number": 23, "name": '谢逊'},
+  {"number": 42, "name": '金花婆婆'}
+];
+
+  var b_svg = d3.select("#bing")
+        .attr("width", b_width)
+        .attr("height", b_height);
+
+  var pie = d3.layout.pie();
+
+  var b_piedata = pie.value(function(d){return d.number;})(b_dataset);
+
+  var b_outerRadius = 150;	//外半径
+  var b_innerRadius = 0;	//内半径，为0则中间没有空白
+
+  var b_arc = d3.svg.arc()	//弧生成器
+        .innerRadius(b_innerRadius)	//设置内半径
+        .outerRadius(b_outerRadius);	//设置外半径
+
+  var b_color = d3.scale.category10();
+
+  var b_arcs = b_svg.selectAll("g")
+          .data(b_piedata)
+          .enter()
+          .append("g")
+          .attr("transform","translate("+ (b_width/2) +","+ (b_width/2) +")");
+
+  b_arcs.append("path")
+    .attr("fill",function(d,i){
+      return b_color(i);
+    })
+    .attr("d",function(d){
+      return b_arc(d);
+    });
+
+  b_arcs.append("text")
+    .attr("transform",function(d){
+      return "translate(" + b_arc.centroid(d) + ")";
+    })
+    .attr("text-anchor","middle")
+    .text(function(d){
+      console.log(d);
+      return d.data.name;
+    });
+
+};dopie();
+
+
+
+</script>
+
+
+
+    </body>
+</html>
