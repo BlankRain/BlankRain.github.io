@@ -122,7 +122,7 @@ SOFTWARE.
   color: #264ec5;
 }
 
-input .demo{
+input.demo{
      width: 100%;
     border: #4CAF50;
     background-color: rgba(59, 59, 59, 0.47);
