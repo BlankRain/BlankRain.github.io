@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=0.67, maximum-scale=0.67, user-scalable=no">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="board-area">
+      </div>
+    </div>
+   <!-- Include the Polyfill -->
+   <script>
+       var x=new Date();
+   </script>
+<script src="https://www.javapoly.com/javapoly.js"></script>
+<script type="text/java"  src="js/clojure-1.8.0.jar"></script>
+<!-- Write your Java code -->
+<script type="text/java">
+  package com.demo;
+  import com.javapoly.dom.Window;
+
+  public class Greeter
+  {
+
+     
+ 
+    public static void sayHello(String name)
+    {
+
+      Window.alert("Hello " + name + ", from Java!");
+      String[] arg=new String[]{"-e","(+ 1 2)"};
+	  clojure.main.main(arg);
+    }
+    public  static void clj(String cljstr){
+        String[] arg=new String[]{"-e",cljstr};
+	    clojure.main.main(arg);
+    }
+  }
+</script>
+
+<!-- Invoke your Java code from Javascript -->
+<script type="text/javascript">
+   
+  com.demo.Greeter.sayHello("world");
+
+</script>
+  </body>
+</html>
