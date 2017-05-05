@@ -1,18 +1,41 @@
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=0.67, maximum-scale=0.67, user-scalable=no">
-    <link href="css/style.css" rel="stylesheet" type="text/css">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen">
+  <link rel="stylesheet" href="stylesheets/github-dark.css">
   </head>
   <body>
     <div class="container">
       <div id="board-area">
+          Sorry,It's Slow ,You need Just wait about 2 min or more..
       </div>
     </div>
    <!-- Include the Polyfill -->
-   <script>
-       var x=new Date();
-   </script>
+<pre>
+    &lt;script src="https://www.javapoly.com/javapoly.js"&gt; &lt;/script&gt;
+    &lt;script type="text/java"  src="js/clojure-1.8.0.jar"&gt; &lt;/script&gt;
+
+    &lt;script type="text/java"&gt;
+  package com.demo;
+  import com.javapoly.dom.Window;
+
+  public class Greeter
+  {
+    public static void sayHello(String name)
+    {
+      Window.alert("Hello " + name + ", from Java!");
+      String[] arg=new String[]{"-e","(+ 1 2)"};
+	  clojure.main.main(arg);
+    }
+    public  static void clj(String cljstr){
+        String[] arg=new String[]{"-e",cljstr};
+	    clojure.main.main(arg);
+    }
+  }
+&lt;/script&gt;
+</pre>
 <script src="https://www.javapoly.com/javapoly.js"></script>
 <script type="text/java"  src="js/clojure-1.8.0.jar"></script>
 <!-- Write your Java code -->
@@ -22,12 +45,8 @@
 
   public class Greeter
   {
-
-     
- 
     public static void sayHello(String name)
     {
-
       Window.alert("Hello " + name + ", from Java!");
       String[] arg=new String[]{"-e","(+ 1 2)"};
 	  clojure.main.main(arg);
