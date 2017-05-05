@@ -16,16 +16,26 @@
 <!-- Write your Java code -->
 <script type="text/java">
   package com.demo;
-  import com.javapoly.dom.Window;
 
   public class Greeter
   {
-    public static void sayHello(String name)
+    public static String[] array(String s1)
     {
-      Window.alert("Hello " + name + ", from Java!");
-      String[] arg=new String[]{"-e","(+ 1 2)" };
-	  clojure.main.main(arg);
+  	return new String[]{s1};
     }
+     public static String[] array(String s1,String s2)
+    {
+  	return new String[]{s1,s2};
+    }
+      public static String[] array(String[] s1,String s2)
+    { String[] x=new String[s1.length+1]();
+    	for(int i=0;i<s1.length;i++){
+	x[i]=s1[i];
+	};
+	x[s1.length]=s2;
+  	return x;
+    }
+  
     public  static void clj(String cljstr){
         String[] arg=new String[]{"-e",cljstr};
 	    clojure.main.main(arg);
